@@ -4,6 +4,10 @@ import yfinance as yf
 
 app = FastAPI()
 
+@app.get("/health")
+def health_check():
+    return {"status": "ok"}
+
 @app.get("/price")
 def get_price(symbol: str = Query(...), interval: str = Query("1d"), period: str = Query("1mo")):
     ticker = yf.Ticker(symbol)
